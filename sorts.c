@@ -66,3 +66,10 @@ void bubble_sort(int * list, unsigned int size, char verbose)
         }
     }
 }
+
+
+
+void quick_sort(int * list, unsigned int size, char verbose)
+{
+    // Implementation using Stacks yet to be done
+}

@@ -10,4 +10,12 @@
  */
 void bubble_sort(int * list, unsigned int size, char verbose);
 
+/**
+ * @brief Sorts the given integer array using quick sort
+ * 
+ * @param list pointer to the first element in the array
+ * @param size size of the array
+ * @param verbose 'V' if passes are to be printed to standard output (linux colors)
+ */
+void quick_sort(int * list, unsigned int size, char verbose);
 #endif /*CODES_H*/
