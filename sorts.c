@@ -1,5 +1,6 @@
 #include "sorts.h"
 #include <stdio.h>
+#include <stdlib.h>
 
 void bubble_sort(int * list, unsigned int size, char verbose)
 {
@@ -116,10 +117,48 @@ void selection_sort(int * list, unsigned int size, char verbose)
     }
 }
 
+void merge(int * listA, int * listB, unsigned int sizeA, unsigned int sizeB, char verbose)
+{
+    int size = sizeA + sizeB;
+    int * sorted = (int*)malloc( sizeof(int) * (size) );
+    unsigned int cursorA = 0, cursorB = 0;
+
+    for (int i = 0; i < size; i++)
+    {
+        if( listA[cursorA] <= listB[cursorB] || cursorB == sizeB )
+        {
+            sorted[i] = listA[cursorA];
+            cursorA++;
+        } else {
+            sorted[i] = listB[cursorB];
+            cursorB++;
+        }
+    }
+
+    for (int i = 0; i < size; i++)
+    {
+        listA[i] = sorted[i];
+        printf("%d ", sorted[i]);
+    }
+    printf("\n");
+}
+
+void merge_sort(int * list, unsigned int size, char verbose)
+{
+    if (size <= 1) return;
+
+    merge_sort(list, size/2, verbose); // Sort the first half
+    merge_sort(list+size/2, (size+1)/2, verbose); // Sort the second half
+
+    merge(list, list+size/2, size/2, (size+1)/2, verbose); // Merge the two sorted halves
+}
+
 int main()
 {
     int arr[] = {3, 7, 8, 1, 9, 10, 2, 6};
     unsigned int size = sizeof(arr)/sizeof(int);
 
-    selection_sort(arr, size, 'V');
+    merge_sort(arr, size, 'V');
+
+    return 0;
 }
